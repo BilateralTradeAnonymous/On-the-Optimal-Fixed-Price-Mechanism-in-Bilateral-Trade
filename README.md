@@ -11,7 +11,7 @@ We first provide the numerical results in Section~3.
 Let $n = 16$ and $\{p_i\}_{i\in [n]} = \{0.0, 0.1, 0.19, 0.27, 0.315, 0.355, 0.395, 0.44, 0.485, 0.535, 0.595, 0.665, 0.74, 0.875, 1.195, 1000.0\}$, we need to show that the optimal value of following optimization problem has a lower bound of $0.72$.
 
 $$
-\min_{s_1,s_2\cdots, s_n\atop b_1,b_2,\cdots,b_n, r} \quad r  \\
+\min_{s_1,s_2\cdots, s_n\atop b_1,b_2,\cdots,b_n, r} & \quad r&  \\
 \textsf{s.t.} \quad  & s_i, b_i \geq 0 & \forall i \in [n]\\
 & \sum_{i=1}^n s_i \geq 1 \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \geq 1 \\
 & \sum_{i=1}^n s_i \leq 1 + \frac{1}{p_n} \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \leq 1 + \frac{1}{p_n} &     \\
