@@ -10,44 +10,44 @@ We first provide the numerical results in Section~3.
 
 Let $n = 16$ and $\{p_i\}_{i\in [n]} = \{0.0, 0.1, 0.19, 0.27, 0.315, 0.355, 0.395, 0.44, 0.485, 0.535, 0.595, 0.665, 0.74, 0.875, 1.195, 1000.0\}$, we need to show that the optimal value of following optimization problem has a lower bound of $0.72$.
 
-$$
-\min_{s_1,s_2\cdots, s_n\atop b_1,b_2,\cdots,b_n, r} & \quad r&  \\
+```math
+\min_{s_1,s_2\cdots, s_n\atop b_1,b_2,\cdots,b_n, r} & \quad r &  \\
 \textsf{s.t.} \quad  & s_i, b_i \geq 0 & \forall i \in [n]\\
 & \sum_{i=1}^n s_i \geq 1 \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \geq 1 &\\
 & \sum_{i=1}^n s_i \leq 1 + \frac{1}{p_n} \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \leq 1 + \frac{1}{p_n} &     \\
 & \sum_{i=1}^n \sum_{j=1}^n s_i b_j \max(p_i,p_j) \geq 1 &    \\
 & \sum_{i=1}^n s_i p_i+\sum_{i=1}^{t - 1} \sum_{j=t+1}^{n} s_i b_j (p_j - p_i) \leq r & \forall t \in [n]
-$$
+```
 
 
 We could see that the optimum is at least $0.72$ is equivalent to the non-existence of feasible point $(s_i, b_i, r)$ in the following region:
 
 
-$$
+```math
 &r\leq 0.72  \\
   & s_i, b_i \geq 0 & \forall i \in [n]\\
 & \sum_{i=1}^n s_i \geq 1 \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \geq 1 \\
 & \sum_{i=1}^n s_i \leq 1 + \frac{1}{p_n} \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \leq 1 + \frac{1}{p_n} &     \\
 & \sum_{i=1}^n \sum_{j=1}^n s_i b_j \max(p_i,p_j) \geq 1 &    \\
 & \sum_{i=1}^n s_i p_i+\sum_{i=1}^{t - 1} \sum_{j=t+1}^{n} s_i b_j (p_j - p_i) \leq r & \forall t \in [n]
-$$
+```
 
 
 What's more, if $(s_i, b_i, r)$ is a feasible point, so is $(s_i, b_i, 0.72)$. Therefore, it suffices to check whether the optimum of following optimization problem is greater than $1$ or not.
-$$
+```math
 \max_{s_1,s_2\cdots, s_n\atop b_1,b_2,\cdots,b_n, r} \quad & \sum_{i=1}^n \sum_{j=1}^n s_i b_j \max(p_i,p_j)   \\
 \textsf{s.t.} \quad  & s_i, b_i \geq 0 & \forall i \in [n]\\
 & \sum_{i=1}^n s_i \geq 1 \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \geq 1 \\
 & \sum_{i=1}^n s_i \leq 1 + \frac{1}{p_n} \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \leq 1 + \frac{1}{p_n} &     \\
 & \sum_{i=1}^n s_i p_i+\sum_{i=1}^{t - 1} \sum_{j=t+1}^{n} s_i b_j (p_j - p_i) \leq 0.72 & \forall t \in [n]
-$$
+```
 If the optimum above is less that $1$, this means that the lower bound is at least $0.72$.  We implement such optimization problem via Gurobi and  the code could be found at ``` FullInfo-LowerBound.py ```.  We ran it on a compute node with 40 cores and 200GB memory and it took ~24 hours to finish the computation with a provable upper bound lower than $1$. 
 
 
 
 #### Upper Bound
 
-In this setting, we define $n = 80$. We define $p_1 = 0,p_n = 1000$, and $p_i = (i + 4) / 100.0$ for $1<i<n$.  The instance is in ``example.txt``, and we use ``calc.cpp`` to calculate the approximation ratio of the optimal mechanism on such instance.
+In this setting, we define $n = 80$. We define $p_1 = 0$, $p_n = 1000$, and $p_i = (i + 4) / 100.0$ for $1 < i < n$.  The instance is in ``example.txt``, and we use ``calc.cpp`` to calculate the approximation ratio of the optimal mechanism on such instance.
 
 
 
@@ -55,24 +55,27 @@ In this setting, we define $n = 80$. We define $p_1 = 0,p_n = 1000$, and $p_i = 
 
 #### Knowing E[S]
 
-We choose $n = 50$ and $p_n = 1000$. Besides, $p_i = (i - 1) / 20$ for $i\in [n - 1]$. We choose $\{w_i\}_{i\in[n]}$ according to some heuristics. Please check ``ES.py`` for the details that how we choose $\{w_i\}_{i\in [n]}$.
+We choose $n = 50$ and $p_n = 1000$. Besides, $p_i = (i - 1) / 20$ for $i\in [n - 1]$. We choose $\{ w_i \}$ according to some heuristics. Please check ``ES.py`` for the details that how we choose $\{ w_i \}$.
 
 We need to give a lower bound of the following optimization problem $\mathcal{O}$:
-$$
+
+```math
 \min_{s_1,s_2\cdots, s_n\atop b_1,b_2,\cdots,b_n} \quad &\frac{\sum_{t=1}^n w_t \left(\sum_{i=1}^n s_i p_i+\sum_{i=1}^{t - 1} \sum_{j=t+1}^{n} s_i b_j (p_j - p_i)\right)}{\sum_{i=1}^n \sum_{j=1}^n s_i b_j \max(p_i,p_j)} \nonumber \\
 \textsf{s.t.} \quad  & s_i, b_i \geq 0 & \forall i \in [n]\\
 & \sum_{i=1}^n s_i \geq 1 \quad \text{ and } \quad \sum_{i=1}^n s_i \leq 1 + \frac{1}{p_n}  \quad \text{ and } \quad \sum_{i=1}^{n-1} s_i \leq 1\\
 & \sum_{i=1}^n b_i \geq 1 \quad \text{ and } \quad \sum_{i=1}^{n-1} b_i \leq 1 \\
 & \sum_{i=1}^n s_i \cdot p_i = 1
-$$
+```
+
 To verify the optimum of the optimization problem above has a lower bound of at least $0.65$, it suffices to show that the optimal value of the following problem is non-negative:
-$$
+
+```math
 \min_{s_1,s_2\cdots, s_n\atop b_1,b_2,\cdots,b_n} \quad &{\sum_{t=1}^n w_t \left(\sum_{i=1}^n s_i p_i+\sum_{i=1}^{t - 1} \sum_{j=t+1}^{n} s_i b_j (p_j - p_i)\right)}-0.65\cdot{\sum_{i=1}^n \sum_{j=1}^n s_i b_j \max(p_i,p_j)} \nonumber \\
 \textsf{s.t.} \quad  & s_i, b_i \geq 0 & \forall i \in [n]\\
 & \sum_{i=1}^n s_i \geq 1 \quad \text{ and } \quad \sum_{i=1}^n s_i \leq 1 + \frac{1}{p_n}  \quad \text{ and } \quad \sum_{i=1}^{n-1} s_i \leq 1\\
 & \sum_{i=1}^n b_i \geq 1 \quad \text{ and } \quad \sum_{i=1}^{n-1} b_i \leq 1 \\
 & \sum_{i=1}^n s_i \cdot p_i = 1
-$$
+```
 
 
 However, such optimization problem is hard to solve directly since we do not have a constraint towards $b_n$. Therefore, we separate it into two case where $b_n \leq 10$ and $b_n > 10$.  When $b_n\leq 10$, we just simply add it into the constraints.
