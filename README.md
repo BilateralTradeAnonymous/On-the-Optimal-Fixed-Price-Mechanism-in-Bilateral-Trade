@@ -13,7 +13,7 @@ Let $n = 16$ and $\{p_i\}_{i\in [n]} = \{0.0, 0.1, 0.19, 0.27, 0.315, 0.355, 0.3
 $$
 \min_{s_1,s_2\cdots, s_n\atop b_1,b_2,\cdots,b_n, r} & \quad r&  \\
 \textsf{s.t.} \quad  & s_i, b_i \geq 0 & \forall i \in [n]\\
-& \sum_{i=1}^n s_i \geq 1 \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \geq 1 \\
+& \sum_{i=1}^n s_i \geq 1 \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \geq 1 &\\
 & \sum_{i=1}^n s_i \leq 1 + \frac{1}{p_n} \quad \text{ {and} } \quad  \sum_{i=1}^n b_i \leq 1 + \frac{1}{p_n} &     \\
 & \sum_{i=1}^n \sum_{j=1}^n s_i b_j \max(p_i,p_j) \geq 1 &    \\
 & \sum_{i=1}^n s_i p_i+\sum_{i=1}^{t - 1} \sum_{j=t+1}^{n} s_i b_j (p_j - p_i) \leq r & \forall t \in [n]
